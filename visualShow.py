@@ -20,27 +20,33 @@ def get_files():
 app = dash.Dash("Visualisation")
 app.title = "CSV Visualisation"
 app.layout = html.Div([
-	html.Label("Select a CSV File: "),
-	dcc.Dropdown(
-		options = get_files(),
-		id = "csv-select"
-	),
-	html.Br(),
+	html.Div([
+		html.Span("Select a CSV File: "),
+		dcc.Dropdown(
+			options = get_files(),
+			id = "csv-select"
+		)
+	], id = "csv-select-grid"),
 
-	html.Label("Select X Axis column: "),
-	dcc.Dropdown(
-		id = "csv-x-select"
-	),
-	html.Br(),
-	html.Label("Select Y Axis column: "),
-	dcc.Dropdown(
-		id = "csv-y-select"
-	),
+	html.Div([
+		html.Div([
+			html.Span("X Axis column: "),
+			dcc.Dropdown(
+				id = "csv-x-select"
+			)
+		], id = "x-grid"),
+		html.Div([
+			html.Span("Y Axis column: "),
+			dcc.Dropdown(
+				id = "csv-y-select"
+			)
+		], id = "y-grid")
+	], id = "axis-select"),
 
 	dcc.Graph(id = "csv-visual"),
 
 	dcc.Store(id = "actual-file", data = {"file": {}})
-])
+], id = "main-body")
 
 
 @app.callback(
@@ -57,7 +63,6 @@ def update_columns(filename, glob):
 	if not filename:
 		return [], [], {}
 	data = pd.read_csv(data_dir + filename)
-	print(glob["file"])
 	return list(data.columns), list(data.columns), data.to_json()
 
 
@@ -71,9 +76,6 @@ def update_columns(filename, glob):
 	prevent_initial_call = True
 )
 def auto_graph(x_col, y_col, glob):
-	print(glob)
-	print(x_col)
-	print(y_col)
 	if not x_col or not y_col:
 		return {}
 	
@@ -87,9 +89,7 @@ def auto_graph(x_col, y_col, glob):
 		)
 
 		figure.update_layout(
-			title = f"{x_col} Frequency Distribution",
-			height = 600,
-			width = 960
+			title = f"{x_col} Frequency Distribution"
 		)
 	else:
 		figure = {
@@ -104,9 +104,7 @@ def auto_graph(x_col, y_col, glob):
 			"layout": {
 				"title": f"{x_col} vs {y_col}",
 				"xaxis": {"title": x_col},
-				"yaxis": {"title": y_col},
-				"height": 600,
-				"width": 960
+				"yaxis": {"title": y_col}
 			}
 		}
 

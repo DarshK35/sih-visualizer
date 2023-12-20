@@ -1,0 +1,55 @@
+body {
+	font-family: sans-serif;
+	font-size: 14px;
+	margin: 0px;
+	padding: 0px;
+	align-content: center;
+}
+body div {
+	margin: 0px;
+}
+
+div span {
+	flex: 1;
+	font-size: 16px;
+	height: 36px;
+	width: 150px;
+	text-align: right;
+	margin: 5px;
+}
+div .dash-dropdown {
+	flex: 1;
+	width: 250px;
+	padding: 0px 5px;
+	margin: 5px;
+}
+div .interactive-drop div div {
+	display: block;
+}
+
+#main-body {
+	display: inline-block;
+	width: 840px;
+	height: 475px;
+	overflow: hidden;
+}
+
+#csv-visual {
+	margin: 5px;
+	flex: 1;
+	height: 370px;
+}
+
+#csv-select-grid {
+	display: flex;
+}
+
+#axis-select {
+	display: flex;
+}
+#x-grid {
+	display: flex;
+}
+#y-grid {
+	display: flex;
+}
