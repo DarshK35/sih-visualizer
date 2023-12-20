@@ -20,57 +20,95 @@ def get_files():
 app = dash.Dash("Visualisation")
 app.title = "CSV Visualisation"
 app.layout = html.Div([
+	html.Label("Select a CSV File: "),
 	dcc.Dropdown(
 		options = get_files(),
 		id = "csv-select"
 	),
+	html.Br(),
 
-	dcc.Graph(id = "csv-visual")
+	html.Label("Select X Axis column: "),
+	dcc.Dropdown(
+		id = "csv-x-select"
+	),
+	html.Br(),
+	html.Label("Select Y Axis column: "),
+	dcc.Dropdown(
+		id = "csv-y-select"
+	),
+
+	dcc.Graph(id = "csv-visual"),
+
+	dcc.Store(id = "actual-file", data = {"file": {}})
 ])
 
-# Using a pair plot to show the correlations
+
+@app.callback(
+	[
+		Output("csv-x-select", "options"),
+		Output("csv-y-select", "options"),
+		Output("actual-file", "data")
+	],
+	Input("csv-select", "value"),
+	State("actual-file", "data"),
+	prevent_initial_call = True
+)
+def update_columns(filename, glob):
+	if not filename:
+		return [], [], {}
+	data = pd.read_csv(data_dir + filename)
+	print(glob["file"])
+	return list(data.columns), list(data.columns), data.to_json()
+
+
 @app.callback(
 	Output("csv-visual", "figure"),
-	Input("csv-select", "value")
+	[
+		Input("csv-x-select", "value"),
+		Input("csv-y-select", "value")
+	],
+	State("actual-file", "data"),
+	prevent_initial_call = True
 )
-def auto_graph(filename):
-	data = pd.read_csv(data_dir + filename)
-	columns = data.columns
-
-	figure = sp.make_subplots(
-		rows = len(columns),
-		cols = len(columns),
-		shared_xaxes = False,
-		shared_yaxes = False
-	)
-
-	for i, col1 in enumerate(columns):
-		for j, col2 in enumerate(columns):
-			if col1 == col2:
-				trace = go.Histogram(
-					x = data[col1],
-					name = col1,
-					showlegend = False,
-				)
-			else:
-				trace = go.Scatter(
-					x=data[col1],
-					y=data[col2],
-					mode='markers',
-					name = col1.split('_')[0] + ' vs ' + col2.split('_')[0],
-					marker = {"size": 4}
-				)
-			figure.add_trace(trace, row=i + 1, col=j + 1)
-
-	for i, col in enumerate(columns):
-		figure.update_xaxes(title_text=col, row=len(columns), col=i + 1)
-		figure.update_yaxes(title_text=col, row=i + 1, col=1)
+def auto_graph(x_col, y_col, glob):
+	print(glob)
+	print(x_col)
+	print(y_col)
+	if not x_col or not y_col:
+		return {}
 	
-	figure.update_layout(
-		showlegend = False,
-		height = 1000,
-		width = 1600
-	)
+	data = pd.read_json(glob)
+	if x_col == y_col:
+		figure = px.histogram(
+			data,
+			x = x_col,
+			nbins = 32,
+			title = f"{x_col} Frequency Distribution"
+		)
+
+		figure.update_layout(
+			title = f"{x_col} Frequency Distribution",
+			height = 600,
+			width = 960
+		)
+	else:
+		figure = {
+			"data": [{
+				"x": data[x_col],
+				"y": data[y_col],
+				"mode": "markers",
+				"marker": {
+					"size": 8
+				}
+			}],
+			"layout": {
+				"title": f"{x_col} vs {y_col}",
+				"xaxis": {"title": x_col},
+				"yaxis": {"title": y_col},
+				"height": 600,
+				"width": 960
+			}
+		}
 
 	return figure
 
