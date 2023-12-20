@@ -8,11 +8,16 @@ from dash import dcc, html, callback
 from dash.dependencies import Input, Output, State
 from dash.exceptions import PreventUpdate
 
+from sklearn.preprocessing import MinMaxScaler
+from keras.models import load_model
+
 from plotly import express as px
 from plotly import subplots as sp
 from plotly import graph_objects as go
 
 data_dir = "Data/"
+model = load_model("working-predictor-v7.h5")
+scaler = MinMaxScaler()
 
 def get_files():
 	ret = [f for f in os.listdir(data_dir) if os.path.isfile(os.path.join(data_dir, f))]
@@ -50,7 +55,10 @@ app.layout = html.Div([
 		html.Span("Column to Check: "),
 		dcc.Dropdown(
 			id = "cont-col-select"
-		)
+		),
+
+		html.Span("Number of data points to extend: "),
+		dcc.Input(id = "extend-pred", type = "number")
 	], id = "pred-analyse"),
 
 	dcc.Graph(id = "future-preds"),
@@ -127,5 +135,59 @@ def auto_graph(x_col, y_col, glob):
 		}
 
 	return figure
+
+@app.callback(
+	Output("future-preds", "figure"),
+	[
+		Input("cont-col-select", "value"),
+		Input("extend-pred", "value")
+	],
+	State("actual-file", "data")
+)
+def prediction(col, extend_len, glob):
+	if not col:
+		return {}
+	
+	data = pd.read_json(io.StringIO(glob))
+	vals = data[col].values
+	vals = vals.reshape(-1, 1)
+	vals_norm = scaler.fit_transform(vals)
+
+	sequence_len = 10
+	extend = vals_norm[-sequence_len:].reshape(1, sequence_len, 1)
+
+	for _ in range(extend_len):
+		pred = [model.predict(extend[:, -sequence_len:, :])]
+		extend = np.append(extend, pred, axis = 1)
+	
+	extend = extend.reshape(-1, 1)
+	extend_denorm = scaler.inverse_transform(extend)
+	extend_denorm = extend_denorm.flatten()
+
+	x_ticks = list(range(1, len(extend_denorm + 1)))
+
+	figure = {
+		"data": [{
+			"x": x_ticks[:-extend_len],
+			"y": extend_denorm[:-extend_len],
+			"type": "line"
+		}, {
+			"x": x_ticks[-extend_len:],
+			"y": extend_denorm[-extend_len:],
+			"type": "line",
+			"line": {
+				"color": "red"
+			}
+		}],
+		"layout": {
+			"title": f"Future Trends {col}",
+			"yaxis": {
+				"title": col
+			}
+		}
+	}
+
+	return figure
+
 
 app.run_server()
