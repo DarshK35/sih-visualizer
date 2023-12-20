@@ -27,13 +27,6 @@ div .interactive-drop div div {
 	display: block;
 }
 
-#main-body {
-	display: inline-block;
-	width: 840px;
-	height: 475px;
-	overflow: hidden;
-}
-
 #csv-visual {
 	margin: 5px;
 	flex: 1;

@@ -1,0 +1,101 @@
+Month,Year,"Company Name","Quantity (000 Metric Tonnes)",last_updated
+April,2023,OIL,0.27,NA
+April,2023,"Total ( Crude oil + Condensate)",2.38,NA
+May,2023,"Total ( Crude oil + Condensate)",2.50,NA
+June,2023,OIL,0.27,NA
+June,2023,Condensate,0.17,NA
+June,2023,"Total ( Crude oil + Condensate)",2.43,NA
+July,2023,"Total crude oil",2.31,NA
+April,2022,Condensate,0.11,NA
+May,2022,"Total crude oil",2.45,NA
+December,2022,"PSU total (Crude Oil)",1.83,NA
+January,2023,ONGC,1.57,NA
+January,2023,OIL,0.27,NA
+January,2023,"PSU total (Crude Oil)",1.84,NA
+January,2023,"Total ( Crude oil + Condensate)",2.49,NA
+February,2023,OIL,0.25,NA
+March,2023,ONGC,1.57,NA
+March,2023,"Total crude oil",2.34,NA
+April,2023,ONGC,1.51,2023-12-20
+April,2023,OIL,0.27,2023-12-20
+April,2023,Condensate,0.12,2023-12-20
+June,2023,OIL,0.27,2023-12-20
+April,2022,OIL,0.25,2023-12-20
+May,2022,"Total ( Crude oil + Condensate)",2.55,2023-12-20
+June,2022,OIL,0.26,2023-12-20
+July,2022,ONGC,1.56,2023-12-20
+July,2022,"JVC/ Private",0.53,2023-12-20
+August,2022,"Total ( Crude oil + Condensate)",2.44,2023-12-20
+September,2022,ONGC,1.51,2023-12-20
+September,2022,"JVC/ Private",0.50,2023-12-20
+November,2022,"JVC/ Private",0.52,2023-12-20
+February,2023,"Total ( Crude oil + Condensate)",2.16,2023-12-20
+March,2023,OIL,0.28,2023-12-20
+April,2023,"Total crude oil",2.26,NA
+May,2023,OIL,0.28,NA
+May,2022,OIL,0.27,NA
+May,2022,"JVC/ Private",0.57,NA
+June,2022,ONGC,1.55,NA
+June,2022,"PSU total (Crude Oil)",1.80,NA
+August,2022,OIL,0.26,NA
+August,2022,Condensate,0.11,NA
+September,2022,"JVC/ Private",0.50,NA
+October,2022,Condensate,0.11,NA
+October,2022,"Total ( Crude oil + Condensate)",2.46,NA
+November,2022,Condensate,0.12,NA
+March,2023,OIL,0.28,NA
+March,2023,"Total ( Crude oil + Condensate)",2.45,NA
+May,2023,"PSU total (Crude Oil)",1.84,2023-12-20
+May,2023,"JVC/ Private",0.50,2023-12-20
+May,2023,"Total ( Crude oil + Condensate)",2.50,2023-12-20
+June,2023,"PSU total (Crude Oil)",1.77,2023-12-20
+June,2023,Condensate,0.17,2023-12-20
+July,2023,"JVC/ Private",0.50,2023-12-20
+July,2023,"Total crude oil",2.31,2023-12-20
+July,2023,Condensate,0.19,2023-12-20
+April,2022,ONGC,1.56,2023-12-20
+April,2022,"Total ( Crude oil + Condensate)",2.47,2023-12-20
+May,2022,"JVC/ Private",0.57,2023-12-20
+May,2022,Condensate,0.10,2023-12-20
+June,2022,"PSU total (Crude Oil)",1.80,2023-12-20
+June,2022,"Total ( Crude oil + Condensate)",2.44,2023-12-20
+July,2022,"PSU total (Crude Oil)",1.82,2023-12-20
+July,2022,"Total crude oil",2.35,2023-12-20
+July,2022,Condensate,0.11,2023-12-20
+July,2022,"Total ( Crude oil + Condensate)",2.45,2023-12-20
+August,2022,"PSU total (Crude Oil)",1.81,2023-12-20
+August,2022,"Total crude oil",2.33,2023-12-20
+September,2022,OIL,0.26,2023-12-20
+October,2022,"PSU total (Crude Oil)",1.82,2023-12-20
+November,2022,"Total ( Crude oil + Condensate)",2.41,2023-12-20
+December,2022,"JVC/ Private",0.53,2023-12-20
+January,2023,"Total ( Crude oil + Condensate)",2.49,2023-12-20
+March,2023,"JVC/ Private",0.49,2023-12-20
+April,2023,ONGC,1.51,NA
+April,2023,"JVC/ Private",0.49,NA
+April,2023,Condensate,0.12,NA
+May,2023,"Total crude oil",2.34,NA
+May,2023,Condensate,0.16,NA
+June,2023,"PSU total (Crude Oil)",1.77,NA
+April,2022,"Total crude oil",2.36,NA
+May,2022,"Total ( Crude oil + Condensate)",2.55,NA
+June,2022,"JVC/ Private",0.53,NA
+June,2022,"Total ( Crude oil + Condensate)",2.44,NA
+July,2022,"JVC/ Private",0.53,NA
+July,2022,Condensate,0.11,NA
+August,2022,ONGC,1.54,NA
+August,2022,"PSU total (Crude Oil)",1.81,NA
+August,2022,"JVC/ Private",0.52,NA
+September,2022,ONGC,1.51,NA
+September,2022,"Total ( Crude oil + Condensate)",2.39,NA
+October,2022,ONGC,1.55,NA
+October,2022,OIL,0.27,NA
+October,2022,"PSU total (Crude Oil)",1.82,NA
+November,2022,"Total ( Crude oil + Condensate)",2.41,NA
+December,2022,OIL,0.27,NA
+December,2022,"Total crude oil",2.36,NA
+January,2023,"Total crude oil",2.35,NA
+February,2023,Condensate,0.11,NA
+April,2023,"Total ( Crude oil + Condensate)",2.38,2023-12-20
+May,2023,"Total crude oil",2.34,2023-12-20
+June,2023,"Total ( Crude oil + Condensate)",2.43,2023-12-20

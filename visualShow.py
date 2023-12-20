@@ -46,6 +46,15 @@ app.layout = html.Div([
 
 	dcc.Graph(id = "csv-visual"),
 
+	html.Div([
+		html.Span("Column to Check: "),
+		dcc.Dropdown(
+			id = "cont-col-select"
+		)
+	], id = "pred-analyse"),
+
+	dcc.Graph(id = "future-preds"),
+
 	dcc.Store(id = "actual-file", data = {"file": {}})
 ], id = "main-body")
 
@@ -54,6 +63,7 @@ app.layout = html.Div([
 	[
 		Output("csv-x-select", "options"),
 		Output("csv-y-select", "options"),
+		Output("cont-col-select", "options"),
 		Output("actual-file", "data")
 	],
 	Input("csv-select", "value"),
@@ -62,9 +72,16 @@ app.layout = html.Div([
 )
 def update_columns(filename, glob):
 	if not filename:
-		return [], [], {}
+		return [], [], [], {}
 	data = pd.read_csv(data_dir + filename)
-	return list(data.columns), list(data.columns), data.to_json()
+
+	cont_cols = []
+	for col in data.columns:
+		dtype = data[col].dtype
+		if pd.api.types.is_numeric_dtype(dtype):
+			cont_cols.append(col)
+
+	return list(data.columns), list(data.columns), cont_cols, data.to_json()
 
 
 @app.callback(
