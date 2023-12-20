@@ -1,5 +1,6 @@
 import dash
 import os
+import io
 import numpy as np
 import pandas as pd
 
@@ -79,7 +80,7 @@ def auto_graph(x_col, y_col, glob):
 	if not x_col or not y_col:
 		return {}
 	
-	data = pd.read_json(glob)
+	data = pd.read_json(io.StringIO(glob))
 	if x_col == y_col:
 		figure = px.histogram(
 			data,
@@ -110,4 +111,4 @@ def auto_graph(x_col, y_col, glob):
 
 	return figure
 
-app.run_server(debug = True)
+app.run_server()
